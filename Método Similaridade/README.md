@@ -17,8 +17,8 @@ $$
 onde:
 
 *   cada variável é modelada como um vértice;
-*   $ d(⋅,⋅) $ representa uma métrica de distância;
-*   a solução $ π $ define uma ordenação linear das variáveis.
+*   $d(⋅,⋅)$ representa uma métrica de distância;
+*   a solução $π$ define uma ordenação linear das variáveis.
 
 Diferentemente do TSP clássico, não consideramos o fechamento do ciclo, pois o objetivo é obter uma sequência linear e não um percurso circular.
 
