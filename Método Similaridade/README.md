@@ -51,8 +51,6 @@ d_{E}(x,y)
 \right)^{1/2}
 $$
 
-ou, equivalentemente,
-
 $$
 d_{E}(x,y)
 =
