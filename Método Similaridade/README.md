@@ -43,51 +43,60 @@ Algumas dessas métricas serão formuladas a seguir.
 A distância Euclidiana é um caso particular da distância de Minkowski para \(p=2\):
 
 $$
-d_{E} (x,y)
+
+d_E(x,y)
 =
 \left(
 \sum_{i=1}^{p}
 |x_i-y_i|^2
 \right)^{1/2}
+
 $$
 
 $$
-d_{E} (x,y)
+
+d_E(x,y)
 =
 \sqrt{
 \sum_{i=1}^{p}
 (x_i-y_i)^2
 }
+
 $$
+
 
 ### II. Distância Euclidiana ao quadrado — \(L_{2}^2\)
 
 A distância Euclidiana ao quadrado é definida por:
 
 $$
-d_{E^2} (x,y)
+
+d_{E^2}(x,y)
 =
 \sum_{i=1}^{p}
 (x_i-y_i)^2
-$$
-
-### III. Distância de Manhattan — \( L_{1} \)
-
-A distância de Manhattan, também conhecida como distância \( L_{1} \), é dada por:
 
 $$
-d_{M} (x,y)
+
+### III. Distância de Manhattan — \(L_{1}\)
+
+A distância de Manhattan, também conhecida como distância \(L_{1}\), é dada por:
+
+$$
+
+d_M(x,y)
 =
 \sum_{i=1}^{p}
 |x_i-y_i|
+
 $$
 
-### IV. Distância de Chebyshev — \( L_{\infty\} )
+### IV. Distância de Chebyshev — \(L_{\infty\})
 
 A distância de Chebyshev corresponde ao maior valor absoluto da diferença entre os atributos:
 
 $$
-d_{C} (x,y)
+d_C(x,y)
 =
 \max_{1 \leq i \leq p}
 |x_i-y_i|
@@ -95,4 +104,4 @@ $$
 
 ## Métrica utilizada
 
-Para a análise das diferentes técnicas de reordenação, utilizaremos a **Distância Euclidiana (\( L_{2} \))** como medida de distância entre as observações.
+Para a análise das diferentes técnicas de reordenação, utilizaremos a **Distância Euclidiana (\(L_{2}\))** como medida de distância entre as observações.
