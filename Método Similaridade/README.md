@@ -1,41 +1,100 @@
-Para representar esse método, escolhemos implementar a abordagem Robinsoniana utilizando três técnicas de reordenação:
-1. *Clustering Hierárquico*
+# Abordagem Robinsoniana
 
-2. *Clustering Hierárquico* $+$ *Optimal Leaf Ordering (OLO)*
+Para representar esse método, escolhemos implementar a **abordagem Robinsoniana** utilizando três técnicas de reordenação:
 
-3. *Traveling Salesman Problem (TSP)*
+1. **Clustering Hierárquico**
+2. **Clustering Hierárquico + Optimal Leaf Ordering (OLO)**
+3. **Traveling Salesman Problem (TSP)**
 
-No artigo Matrix Reordering Methods for Table and Network Visualization, os autores classificam a abordagem Robinsoniana (*Robinsonian approaches*) como os métodos que constroem uma matriz de similaridade e buscam aplicar uma permutação que aproxime essa matriz a uma matriz de Robinson.
+No artigo *Matrix Reordering Methods for Table and Network Visualization*, os autores classificam a abordagem Robinsoniana (*Robinsonian approaches*) como os métodos que constroem uma matriz de similaridade e buscam aplicar uma permutação que aproxime essa matriz a uma **matriz de Robinson**.
+
+## Matriz de Robinson
 
 > **Definição: Matriz de Robinson**
 >
-> Uma matriz simétrica $R$ é chamada de matriz de similaridade de Robinson se seus valores decrescem monotonicamente ao se afastar da diagonal principal.
+> Uma matriz simétrica \(R\) é chamada de **matriz de similaridade de Robinson** se seus valores decrescem monotonicamente ao se afastar da diagonal principal.
 >
-> Formalmente, para índices $i < j < k$:
+> Formalmente, para índices \(i < j < k\):
 >
-> <center> $R_{i,k} ≤ R_{i,j}$ </center>
+> $$
+> R_{i,k} \leq R_{i,j}
+> $$
 >
-> E de forma equivalente, a similaridade diminui quanto mais distante da diagonal.
+> De forma equivalente, a similaridade diminui quanto mais distante da diagonal principal.
 >
-> No caso de matriz de distâncias, a propriedade é invertida: os valores aumentam monotonicamente ao se afastar da diagonal.
+> No caso de uma **matriz de distâncias**, a propriedade é invertida: os valores aumentam monotonicamente ao se afastar da diagonal.
 
-Algumas medidas de distância entre um par de observações $ d(x,y) $ derivam da função de Minkowsky, dada por:
-> <center> $$ d(x,y) = (\sum_{i=1}^{p}|x_i - y_i|^p)^{1/p} $$</center>
+## Métricas de distância
 
-Algumas dessas métricas serão formuladas a seguir:
-<ol type="I">
-  <li> Distância Euclidiana - $L_2$
-$$ d_{E}(x,y) = (\sum_{i=1}^{2}|x_i - y_i|^2)^{1/2} = \sqrt{\sum_{i=1}^{2}(x_i - y_i)^2} $$ </li>
+Algumas medidas de distância entre um par de observações \(x\) e \(y\), com \(p\) atributos, derivam da **função de Minkowski**, dada por:
 
-  <li> Distância Euclidiana²
-$$ d_{E^2}(x,y) = \sum_{i=1}^{2}(x_i - y_i)^2 $$ </li>
+$$
+d(x,y) =
+\left(
+\sum_{i=1}^{p}
+|x_i-y_i|^p
+\right)^{1/p}
+$$
 
-  <li> Distância de Manhattan - $L_1$
-$$ d_{M}(x,y) = \sum_{i=1}^{1}|x_i - y_i| $$ </li>
+Algumas dessas métricas serão formuladas a seguir.
 
-  <li> Distância de Chebyshev - $L_{\infty}$
-$$ d_{C}(x,y) = \max|x_i - y_i|$$ </li>
+### I. Distância Euclidiana — \(L_2\)
 
-</ol>
+A distância Euclidiana é um caso particular da distância de Minkowski para \(p=2\):
 
-Para a análise das diferentes técnicas utilizaremos a métrica da Distância Euclidiana - $L_2$.
+$$
+d_E(x,y)
+=
+\left(
+\sum_{i=1}^{p}
+|x_i-y_i|^2
+\right)^{1/2}
+$$
+
+ou, equivalentemente,
+
+$$
+d_E(x,y)
+=
+\sqrt{
+\sum_{i=1}^{p}
+(x_i-y_i)^2
+}
+$$
+
+### II. Distância Euclidiana ao quadrado — \(L_2^2\)
+
+A distância Euclidiana ao quadrado é definida por:
+
+$$
+d_{E^2}(x,y)
+=
+\sum_{i=1}^{p}
+(x_i-y_i)^2
+$$
+
+### III. Distância de Manhattan — \(L_1\)
+
+A distância de Manhattan, também conhecida como distância \(L_1\), é dada por:
+
+$$
+d_M(x,y)
+=
+\sum_{i=1}^{p}
+|x_i-y_i|
+$$
+
+### IV. Distância de Chebyshev — \(L_\infty\)
+
+A distância de Chebyshev corresponde ao maior valor absoluto da diferença entre os atributos:
+
+$$
+d_C(x,y)
+=
+\max_{1 \leq i \leq p}
+|x_i-y_i|
+$$
+
+## Métrica utilizada
+
+Para a análise das diferentes técnicas de reordenação, utilizaremos a **Distância Euclidiana (\(L_2\))** como medida de distância entre as observações.
