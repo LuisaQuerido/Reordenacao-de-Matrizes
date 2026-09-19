@@ -6,7 +6,29 @@ Para representar esse método, escolhemos implementar a **abordagem Robinsoniana
 2. **Clustering Hierárquico + Optimal Leaf Ordering (OLO)**
 3. **Traveling Salesman Problem (TSP)**
 
-No artigo *Matrix Reordering Methods for Table and Network Visualization*, os autores classificam a abordagem Robinsoniana (*Robinsonian approaches*) como os métodos que constroem uma matriz de similaridade e buscam aplicar uma permutação que aproxime essa matriz a uma **matriz de Robinson**.
+No artigo Matrix Reordering Methods for Table and Network Visualization, os autores descrevem que algumas abordagens de reordenação modelam o problema como uma otimização combinatória, buscando uma permutação linear que minimize a soma das distâncias entre elementos consecutivos.
+
+Formalmente, seja $ π ∈ S_n $ uma permutação das variáveis, o problema pode ser formulado como:
+
+<center> $$ \min_{π ∈ S_n}{\sum_{i=1}^{n-1} d(π_i, π_{i+1})} $$ </center>
+
+onde:
+
+*   cada variável é modelada como um vértice;
+*   $ d(⋅,⋅) $ representa uma métrica de distância;
+*   a solução $ π $ define uma ordenação linear das variáveis.
+
+Diferentemente do TSP clássico, não consideramos o fechamento do ciclo, pois o objetivo é obter uma sequência linear e não um percurso circular.
+
+Utilizamos a heurística do vizinho mais próximo *(Nearest Neighbor)* para obter uma solução aproximada do *Traveling Salesman Problem (TSP)*.
+
+Embora existam algoritmos exatos para o TSP, o problema é NP-difícil e sua complexidade cresce exponencialmente com o número de variáveis, tornando a solução ótima impraticável para matrizes de tamanho moderado.
+
+Conforme discutido no artigo supracitado, abordagens heurísticas são amplamente utilizadas no contexto de reordenação de matrizes por serem computacionalmente eficientes e adequadas para análise visual exploratória.
+
+Ao minimizar a soma das distâncias entre elementos adjacentes, o método tende a posicionar variáveis mais similares próximas na ordenação final, favorecendo uma estrutura aproximadamente Robinsoniana.
+
+No artigo *Matrix Reordering Methods for Table and Network Visualization*, os autores também classificam a abordagem Robinsoniana (*Robinsonian approaches*) como os métodos que constroem uma matriz de similaridade e buscam aplicar uma permutação que aproxime essa matriz a uma **matriz de Robinson**.
 
 ## Matriz de Robinson
 
