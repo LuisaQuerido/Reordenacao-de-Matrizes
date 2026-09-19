@@ -1,7 +1,7 @@
 Para representar esse método, escolhemos implementar a abordagem Robinsoniana utilizando três técnicas de reordenação:
 1. *Clustering Hierárquico*
 
-2. *Clustering Hierárquico* $ $ $+$ *Optimal Leaf Ordering (OLO)*
+2. *Clustering Hierárquico* $+$ *Optimal Leaf Ordering (OLO)*
 
 3. *Traveling Salesman Problem (TSP)*
 
@@ -20,7 +20,7 @@ No artigo Matrix Reordering Methods for Table and Network Visualization, os auto
 > No caso de matriz de distâncias, a propriedade é invertida: os valores aumentam monotonicamente ao se afastar da diagonal.
 
 Algumas medidas de distância entre um par de observações $ d(x,y) $ derivam da função de Minkowsky, dada por:
-<center> $$ d(x,y) = (\sum_{i=1}^{p}|x_i - y_i|^p)^{1/p} $$</center>
+> <center> $$ d(x,y) = (\sum_{i=1}^{p}|x_i - y_i|^p)^{1/p} $$</center>
 
 Algumas dessas métricas serão formuladas a seguir:
 <ol type="I">
