@@ -159,3 +159,145 @@ heatmap_ch_olo = plot_heatmap(
 )
 
 """ ===================== Traveling Salesman Problem (TSP) ===================== """
+# ========== Carregando e Padronizando os Dados ==========
+# Copiando o dataframe em análise
+df_tsp = df.copy()
+
+# Padronizando o dataframe df_tsp
+scaler_tsp = StandardScaler()
+df_tsp_scaled = pd.DataFrame(
+    scaler_tsp.fit_transform(df_tsp),
+    columns=df.columns
+)
+
+# ================ Gerando a Matriz de Distâncias ================
+# Distâncias entre variáveis (colunas)
+distance_vector = pdist(df_tsp_scaled.T, metric='euclidean')
+
+# Convertendo o vetor condensado de distâncias para matriz quadrada simétrica.
+distance_square = squareform(distance_vector)
+
+# ==================== Implementação do TSP ====================
+# Função que ao receber uma matriz utiliza o Nearest Neighbor
+# para retornar a permutação linear das variáveis
+def tsp_solver(matrix):
+    """
+    Resolve o problema de ordenação utilizando
+    a heurística do Vizinho Mais Próximo (Nearest Neighbor).
+
+    Parâmetros:
+        matrix : matriz de distâncias entre variáveis
+
+    Retorna:
+        path : permutação linear das variáveis
+    """
+
+    n = len(matrix)
+    visited_nodes = [False] * n
+    path = [0]
+    visited_nodes[0] = True
+
+    for _ in range(n - 1):
+        current = path[-1]
+
+        next_node = min(
+            (j for j in range(n) if not visited_nodes[j]),
+            key=lambda j: matrix[current][j]
+        )
+
+        path.append(next_node)
+        visited_nodes[next_node] = True
+
+    return path
+
+# Obtendo a sequência ótima aproximada
+tsp_sequence = tsp_solver(distance_square)
+
+# ================= Reordenando a Matriz =================
+# Calculando a Matriz de Correlação
+correlation_matrix = df_tsp_scaled.corr()
+
+# Aplicando a permutação obtida pelo TSP
+tsp_matrix = correlation_matrix.iloc[tsp_sequence, :].iloc[:, tsp_sequence]
+
+# =============== Visualizando a Matriz Reordenada ===============
+# Gerando a Matriz Reordenada
+heatmap_tsp = plot_heatmap(
+    tsp_matrix,
+    "Matriz Reordenada (TSP)"
+)
+
+# ================= Preparação dos Gráficos =================
+# Renomeando a variável heatmap_original para original
+original = heatmap_original
+
+# Ajustando o títulos da Matriz Reordenada CH
+clustering_hierarquico = heatmap_ch.properties(
+    title={
+        "text": "Matriz Reordenada",
+        "subtitle": "Clustering Hierárquico"
+    }
+
+)
+
+# Ajustando o títulos da Matriz Reordenada CH + OLO
+clustering_olo = heatmap_ch_olo.properties(
+    title={
+        "text": "Matriz Reordenada",
+        "subtitle": "Clustering Hierárquico + OLO"
+    }
+
+)
+
+# Ajustando o títulos da Matriz Reordenada TSP
+tsp = heatmap_tsp.properties(
+    title={
+        "text": "Matriz Reordenada",
+        "subtitle": "Traveling Salesman Problem (TSP)"
+    }
+
+)
+
+# ==================== Visualizando o Gráfico Final ====================
+# Comparando a Matriz Original com as Matrizes Reordenadas no formato 2x2
+# E configurando os títulos e os eixos de ambos os gráficos
+heatmap_final = (
+    (original | clustering_hierarquico) & (clustering_olo | tsp)
+    ).configure_title(
+        fontSize=20,
+        lineHeight=22,
+        anchor='middle'
+    ).resolve_scale(
+        color='shared'
+    ).configure_axis(
+        labelFontSize=12,
+        titleFontSize=14,
+        titleFontWeight='bold'
+    )
+
+#heatmap_final
+
+""" =================================== Conclusão =================================== """
+"""
+A comparação entre as quatro matrizes — Original, Reordenada por Clustering Hierárquico (CH), Reordenada por Clustering Hierárquico com Optimal Leaf Ordering (CH + OLO) e Traveling Salesman Problem (TSP) —
+evidencia o impacto da reordenação na estrutura visual da matriz de correlação.
+
+Na matriz original, observa-se uma dispersão das correlações ao longo da matriz, dificultando a identificação imediata de padrões estruturais.
+Embora existam regiões de alta correlação, elas não estão organizadas, o que reduz a clareza visual da estrutura dos dados.
+
+Com a aplicação do Clustering Hierárquico (CH), nota-se o surgimento de blocos mais concentrados próximos à diagonal principal.
+Variáveis com comportamento semelhante passam a ser posicionadas em regiões adjacentes, revelando agrupamentos estruturais que não eram imediatamente visíveis na matriz original.
+No entanto, a ordenação ainda apresenta pequenas descontinuidades internas aos grupos.
+
+Ao aplicar o Clustering Hierárquico com Optimal Leaf Ordering (CH + OLO), observa-se uma organização melhor.
+Os blocos de alta correlação tornam-se mais compactos e visualmente contínuos ao longo da diagonal, reduzindo a fragmentação observada no CH simples.
+Essa melhoria ocorre porque o OLO otimiza a ordem das folhas do dendrograma, minimizando a distância entre elementos adjacentes e aproximando a matriz de uma estrutura Robinsoniana.
+
+Já a reordenação via TSP também promove uma aproximação à estrutura diagonal, posicionando variáveis semelhantes de forma consecutiva.
+Entretanto, diferentemente do CH + OLO, o TSP não preserva uma estrutura hierárquica explícita.
+O resultado apresenta continuidade local forte entre elementos consecutivos, mas pode gerar transições menos estruturadas entre blocos maiores.
+
+De modo geral, estes métodos de reordenação baseados em similaridade melhoram significativamente a legibilidade estrutural da matriz quando comparados à ordem original.
+Além disso, embora baseados em princípios distintos, as três técnicas de reordenação baseada em similaridade analisadas produzem matrizes com organização próxima à estrutura Robinsoniana, evidenciada pela concentração de valores elevados ao longo da diagonal principal.
+
+Assim, a análise comparativa confirma que a escolha do método de reordenação influencia diretamente a clareza visual da estrutura de correlação, sendo que, dentre os métodos analisados, o Clustering Hierárquico com OLO foi o que apresentou melhor desempenho visual no conjunto de dados analisado, com blocos mais definidos e continuidade mais evidente ao longo da diagonal, aproximando-se mais claramente do comportamento esperado de uma matriz aproximadamente Robinsoniana.
