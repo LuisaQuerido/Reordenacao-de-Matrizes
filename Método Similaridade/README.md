@@ -8,9 +8,11 @@ Para representar esse método, escolhemos implementar a **abordagem Robinsoniana
 
 No artigo Matrix Reordering Methods for Table and Network Visualization, os autores descrevem que algumas abordagens de reordenação modelam o problema como uma otimização combinatória, buscando uma permutação linear que minimize a soma das distâncias entre elementos consecutivos.
 
-Formalmente, seja $ π ∈ S_n $ uma permutação das variáveis, o problema pode ser formulado como:
+Formalmente, seja $π ∈ S_n$ uma permutação das variáveis, o problema pode ser formulado como:
 
-<center> $$ \min_{π ∈ S_n}{\sum_{i=1}^{n-1} d(π_i, π_{i+1})} $$ </center>
+$$
+\min_{π ∈ S_n}{\sum_{i=1}^{n-1} d(π_i, π_{i+1})}
+$$
 
 onde:
 
