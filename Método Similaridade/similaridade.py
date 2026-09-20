@@ -278,8 +278,7 @@ heatmap_final = (
 #heatmap_final
 
 """ =================================== Conclusão =================================== """
-"""
-A comparação entre as quatro matrizes — Original, Reordenada por Clustering Hierárquico (CH), Reordenada por Clustering Hierárquico com Optimal Leaf Ordering (CH + OLO) e Traveling Salesman Problem (TSP) —
+""" A comparação entre as quatro matrizes — Original, Reordenada por Clustering Hierárquico (CH), Reordenada por Clustering Hierárquico com Optimal Leaf Ordering (CH + OLO) e Traveling Salesman Problem (TSP) —
 evidencia o impacto da reordenação na estrutura visual da matriz de correlação.
 
 Na matriz original, observa-se uma dispersão das correlações ao longo da matriz, dificultando a identificação imediata de padrões estruturais.
@@ -300,4 +299,4 @@ O resultado apresenta continuidade local forte entre elementos consecutivos, mas
 De modo geral, estes métodos de reordenação baseados em similaridade melhoram significativamente a legibilidade estrutural da matriz quando comparados à ordem original.
 Além disso, embora baseados em princípios distintos, as três técnicas de reordenação baseada em similaridade analisadas produzem matrizes com organização próxima à estrutura Robinsoniana, evidenciada pela concentração de valores elevados ao longo da diagonal principal.
 
-Assim, a análise comparativa confirma que a escolha do método de reordenação influencia diretamente a clareza visual da estrutura de correlação, sendo que, dentre os métodos analisados, o Clustering Hierárquico com OLO foi o que apresentou melhor desempenho visual no conjunto de dados analisado, com blocos mais definidos e continuidade mais evidente ao longo da diagonal, aproximando-se mais claramente do comportamento esperado de uma matriz aproximadamente Robinsoniana.
+Assim, a análise comparativa confirma que a escolha do método de reordenação influencia diretamente a clareza visual da estrutura de correlação, sendo que, dentre os métodos analisados, o Clustering Hierárquico com OLO foi o que apresentou melhor desempenho visual no conjunto de dados analisado, com blocos mais definidos e continuidade mais evidente ao longo da diagonal, aproximando-se mais claramente do comportamento esperado de uma matriz aproximadamente Robinsoniana. """
