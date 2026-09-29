@@ -1,6 +1,6 @@
 # Reordenação de Matrizes
 
-## por Luísa Querido e Sofia Guaranho
+## por Luísa Querido
 
 ### Tópicos
 - Visão Geral da Reordenação
@@ -42,11 +42,9 @@ Este *notebook* pretende apresentar diferentes métodos de reordenação de matr
 A seguir usaremos uma base de dados, disponível em: [https://www.kaggle.com/datasets/yasserh/wine-quality-dataset/data](https://www.kaggle.com/datasets/yasserh/wine-quality-dataset/data), para visualizar os métodos propostos.
 
 _______________________________________
-#### Alguns métodos
+#### Métodos utilizados:
 
 * **Métodos Baseados em Similaridade:** Reordenam linhas e colunas com base em medidas de similaridade entre vetores. Exemplo: Distância Euclidiana, Correlação e Similaridade de Jaccard. Geralmente combinados com: Hierarchical Clustering (Agrupamento Hierárquico);
-
-* **Métodos Espectrais:** Utilizam autovalores e autovetores da matriz ou do grafo associado para determinar uma ordem ótima. Baseiam-se na decomposição espectral: Laplaciano do grafo e Fiedler vector. Muito importante para fundamentação matemática;
 
 _______________________________________
 #### Por que reordenar matrizes?
